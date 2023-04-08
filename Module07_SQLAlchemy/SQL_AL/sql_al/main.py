@@ -2,13 +2,13 @@ import argparse
 import sys
 from sqlalchemy.exc import SQLAlchemyError
 
-# from database.repository import (
-#     get_user,
-#     get_all_todos,
-#     create_todo,
-#     update_todo,
-#     remove_todo,
-# )
+from database.repository import (
+    get_user,
+    get_all_todos,
+    create_todo,
+    update_todo,
+    remove_todo,
+)
 
 parser = argparse.ArgumentParser(description="Todo APP")
 parser.add_argument("--action", help="Command: create, update, list, remove")
