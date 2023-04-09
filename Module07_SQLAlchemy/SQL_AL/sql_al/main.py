@@ -30,6 +30,7 @@ login = my_arg.get("login")
 
 
 def main(user):
+
     match action:
         case "create":
             create_todo(title=title, description=description, user=user)
@@ -43,19 +44,21 @@ def main(user):
                     t.description,
                 )
         case "update":
-            t = update_todo(_id=_id, title=title, description=description, user=user)
+            t, user_name = update_todo(
+                _id=_id, title=title, description=description, user=user
+            )
             if t:
                 print(
                     t.id,
-                    f"Author {t.user.login} | ",
+                    f"Author {user_name} | ",  # Cannot get name of user. Why???
                     t.title,
                     t.description,
                 )
             else:
                 print("Not found!!!")
         case "delete":
-            r = remove_todo(_id=-id, user=user)
-            print(f"Remove: {r}")
+            r = remove_todo(_id=_id, user=user)
+            print(f"Removing: {r}")
         case _:
             print("Nothing")
 

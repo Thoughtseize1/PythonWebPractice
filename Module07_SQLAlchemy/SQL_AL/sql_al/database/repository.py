@@ -1,5 +1,4 @@
 from sqlalchemy import and_
-
 from database.db import session
 from database.models import User, Todo
 
@@ -24,19 +23,29 @@ def get_all_todos(user):
 
 
 def update_todo(_id, title, description, user):
-    todo = session.query(Todo).filter(and_(Todo.user == user, Todo.id == _id))
+    todo = session.query(Todo).filter(and_(Todo.user == user, Todo.id == _id)).first()
     if todo:
-        todo.update({"title": title, "description": description})
+        todo.title = title
+        todo.description = description
         session.commit()
+        session.refresh(todo)
+        user_name = todo.user.login
     session.close()
-    return todo.first()
+    return todo, user_name
+
+
+###One more working case which i left here for myself
+# def update_todo(_id, title, description, user):
+#     todo = session.query(Todo).filter(and_(Todo.user == user, Todo.id == _id))
+#     if todo:
+#         todo.update({"title": title, "description": description})
+#         session.commit()
+#     session.close()
+#     return todo.first()
 
 
 def remove_todo(_id, user):
-    r = (
-        session.query(Todo)
-        .join(User)
-        .filter(and_(Todo.user == user, Todo.id == _id))
-        .delete()
-    )
+    r = session.query(Todo).filter(and_(Todo.user == user, Todo.id == _id)).delete()
+    session.commit()
+    session.close()
     return r

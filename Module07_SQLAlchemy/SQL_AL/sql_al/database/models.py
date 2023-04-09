@@ -26,7 +26,8 @@ class Todo(Base):
 
 @event.listens_for(Todo, "before_update")
 def update_updated_at(mapper, conn, target):
-    target.updated_at(func.now())
+    target.updated_at = func.now()
+    print(target.updated_at)
 
 
 Base.metadata.create_all(engine)
