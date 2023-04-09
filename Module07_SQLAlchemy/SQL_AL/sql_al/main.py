@@ -27,3 +27,44 @@ title = my_arg.get("title")
 description = my_arg.get("desc")
 _id = my_arg.get("id")
 login = my_arg.get("login")
+
+
+def main(user):
+    match action:
+        case "create":
+            create_todo(title=title, description=description, user=user)
+        case "list":
+            todos = get_all_todos(user)
+            for t in todos:
+                print(
+                    t.id,
+                    f"Author {t.user.login} | ",
+                    t.title,
+                    t.description,
+                )
+        case "update":
+            t = update_todo(_id=_id, title=title, description=description, user=user)
+            if t:
+                print(
+                    t.id,
+                    f"Author {t.user.login} | ",
+                    t.title,
+                    t.description,
+                )
+            else:
+                print("Not found!!!")
+        case "delete":
+            r = remove_todo(_id=-id, user=user)
+            print(f"Remove: {r}")
+        case _:
+            print("Nothing")
+
+
+if __name__ == "__main__":
+    user = get_user(login)
+    password = input("Password: ")
+    if password == user.password:
+        main(user)
+    else:
+        print(f"Incorrect password")
+    print(f"ACTION WAS - {action}")
