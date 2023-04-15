@@ -12,7 +12,6 @@ from sqlalchemy import (
 from sqlalchemy.orm import relationship, declarative_base
 from sqlalchemy.ext.hybrid import hybrid_property
 
-###  ЗАКОНЧИЛИ НА 28:04
 Base = declarative_base()
 
 
@@ -63,7 +62,13 @@ class TeacherStudent(Base):
     )
 
 
-@event.listens_for(Todo, "before_update")
+@event.listens_for(Teacher, "before_update")
+def update_updated_at(mapper, conn, target):
+    target.updated_at = func.now()
+    print(target.updated_at)
+
+
+@event.listens_for(Student, "before_update")
 def update_updated_at(mapper, conn, target):
     target.updated_at = func.now()
     print(target.updated_at)

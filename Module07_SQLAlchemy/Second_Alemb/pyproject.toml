@@ -1,17 +1,16 @@
 [tool.poetry]
-name = "sql-al"
+name = "second-alemb"
 version = "0.1.0"
 description = ""
 authors = ["Nikita Sherstianykh <n.sherstianykh@gmail.com>"]
 readme = "README.md"
-packages = [{include = "sql_al"}]
+packages = [{include = "second_alemb"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-sqlalchemy = "^2.0.9"
-aiosqlite = "^0.18.0"
-psycopg2 = "^2.9.6"
 alembic = "^1.10.3"
+faker = "^18.4.0"
+psycopg2 = "^2.9.6"
 
 
 [build-system]

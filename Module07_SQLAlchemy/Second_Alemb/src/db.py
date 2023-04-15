@@ -4,7 +4,6 @@ import pathlib
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-
 # Как должен выглядеть URL:
 # postgresql://username:password@domain_name:port/database_name
 
@@ -27,3 +26,7 @@ engine = create_engine(url, echo=False)
 
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
+
+
+def func1():
+    print("PIDOR!")
