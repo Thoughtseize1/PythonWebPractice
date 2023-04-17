@@ -49,6 +49,27 @@ class Student(Base):
     teachers = relationship(
         "Teacher", secondary="teachers_to_students", back_populates="students"
     )
+    contacts = relationship("ContactPerson", back_populates="student")
+
+    @hybrid_property
+    def full_name(self):
+        return self.first_name + " " + self.last_name
+
+
+class ContactPerson(Base):
+    __tablename__ = 'contacts'
+    id = Column(Integer, primary_key=True)
+    first_name = Column(String(150), nullable=False)
+    last_name = Column(String(150), nullable=False)
+    email = Column(String(150), nullable=False)
+    phone = Column(String(150), nullable=False)
+    address = Column(String(150), nullable=False)
+    student_id = Column(Integer, ForeignKey('students.id', ondelete='CASCADE'))
+    student = relationship('Student', back_populates='contacts')
+
+    @hybrid_property
+    def full_name(self):
+        return self.first_name + ' ' + self.last_name
 
 
 class TeacherStudent(Base):

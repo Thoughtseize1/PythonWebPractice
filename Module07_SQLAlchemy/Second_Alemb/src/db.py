@@ -22,7 +22,7 @@ port = config.get("DB", "PORT")
 # postgresql://username:password@domain_name:port/database_name
 url = f"postgresql://{username}:{password}@{domain}:{port}/{database_name}"
 # Подключаемся к базе данных
-engine = create_engine(url, echo=False)
+engine = create_engine(url, echo=True)
 
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
