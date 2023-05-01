@@ -1,6 +1,6 @@
 from mongoengine import *
 
-from connect import connect
+import connect
 
 
 class User(Document):
@@ -11,7 +11,7 @@ class User(Document):
 
 class Post(Document):
     title = StringField(max_length=120, required=True)
-    author = ReferenceField(User)
+    author = ReferenceField(User, reverse_delete_rule=CASCADE)
     tags = ListField(StringField(max_length=30))
     meta = {"allow_inheritance": True}
 
