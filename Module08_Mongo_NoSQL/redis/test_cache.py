@@ -5,10 +5,12 @@ r = redis.Redis(host="localhost", port=6379, password=None)
 
 r.set("foo", "bar")
 value = r.get("foo")
-print(value)  # bar
+print(value.decode())  # bar
 
 
-client = redis.StrictRedis(host="localhost", port=6379, password=None)
+client = redis.StrictRedis(
+    host="localhost", port=6379, username="default", password=None
+)
 
 #! 1 minute for cache using default_ttl parametr
 cache = RedisLRU(client, default_ttl=1, max_size=3)
