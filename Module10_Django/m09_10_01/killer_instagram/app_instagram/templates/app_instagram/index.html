@@ -1,0 +1,20 @@
+{%extends "app_instagram/base.html" %}
+{% load static %}
+{% block my_content %}
+
+
+<div class="px-4 pt-5 my-5 text-center border-bottom">
+    <h1 class="display-4 fw-bold text-body-emphasis">Шелдон - Тупой пушок</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">{{cat_description}}</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+        <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Погладить пушка</button>
+        <button type="button" class="btn btn-outline-secondary btn-lg px-4">Дать пушку по жопке</button>
+      </div>
+    </div>
+    <div class="overflow-hidden" style="max-height: 30vh;">
+      <div class="container px-5">
+        <img src=" {% static 'app_instagram/sheldon.png' %}" alt="Изображение тупого котяха" style="width: 50%; height: auto;" loading="lazy">
+    </div>
+  </div>
+{% endblock %}
